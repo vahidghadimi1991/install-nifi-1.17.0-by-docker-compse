@@ -1,0 +1,29 @@
+version: "3"
+services:
+    nifi:
+        image: apache/nifi:1.17.0
+        container_name: nifi
+        restart: unless-stopped
+        network_mode: host
+        ports:
+                - 8443:8443
+        environment:
+            - NIFI_WEB_HTTPS_PORT=8443
+            - SINGLE_USER_CREDENTIALS_USERNAME=admin
+            - SINGLE_USER_CREDENTIALS_PASSWORD=GAPffs9kXkdCXUKC90qwrC3h3iMPV3MdQzT49+A2Z9Y
+            - NIFI_SENSITIVE_PROPS_KEY=rHkWR1gDNW3R
+            - NIFI_WEB_PROXY_HOST=
+            - NIFI_WEB_HTTPS_HOST=0.0.0.0
+            - NIFI_CLUSTER_ADDRESS=0.0.0.0
+            - AUTH=tls
+            - KEYSTORE_PATH=/opt/certs/keystore.jks
+            - KEYSTORE_TYPE=JKS
+            - KEYSTORE_PASSWORD=lU+E2QLySaWO1UkbUhn2Yj0m+2S5HZ1Ylj7v9ftUK7w
+            - TRUSTSTORE_PATH=/opt/certs/truststore.jks
+            - TRUSTSTORE_TYPE=JKS
+            - TRUSTSTORE_PASSWORD=08icTv178/XCX3YdGnxgU2XqAwI/HPDdQbl3R2MFDMk
+            - NIFI_SECURITY_USER_AUTHORIZER=single-user-authorizer
+            - NIFI_SECURITY_USER_LOGIN_IDENTITY_PROVIDER=single-user-provider
+        volumes:
+          - ./keystore.jks:/opt/certs/keystore.jks
+          - ./truststore.jks:/opt/certs/truststore.jks
